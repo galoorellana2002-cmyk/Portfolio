@@ -142,9 +142,7 @@ h2{font-size:clamp(40px,6vw,64px);line-height:1.06;font-weight:700;letter-spacin
 .tile{
   position:relative;border-radius:var(--radius);overflow:hidden;background:var(--white);
   padding:52px 40px 0;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:620px;
-  transition:transform .5s cubic-bezier(.2,.7,.2,1);
 }
-.tile:hover{transform:scale(1.008)}
 .tile.full{grid-column:1/-1;min-height:660px}
 .tile.on-gray{background:var(--gray)}
 .tile.black{background:var(--tile-dark);color:var(--ink-on-dark)}
@@ -221,9 +219,11 @@ footer{background:var(--gray);color:var(--ink-2);font-size:12px;border-top:1px s
 footer .wrap{padding-block:20px 28px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 footer a{color:var(--ink-2)}
 
-/* ---------- Animación al hacer scroll (solo si hay JS) ---------- */
-.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.js .reveal.in{opacity:1;transform:none}
+/* ---------- Animaciones de scroll (GSAP) ---------- */
+.mac{will-change:transform}
+.statement .w{transition:none}
+.globalnav{transition:background .3s ease,border-color .3s ease}
+.globalnav.top{background:rgba(251,251,253,0);border-bottom-color:transparent}
 
 /* ---------- Responsive ---------- */
 @media (max-width:1000px){
@@ -247,11 +247,9 @@ footer a{color:var(--ink-2)}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
-  .js .reveal{opacity:1;transform:none}
   html{scroll-behavior:auto}
 }
 </style>
-<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
@@ -551,16 +549,92 @@ document.querySelectorAll('.copy').forEach(function(btn){
   });
 });
 
-// Aparición suave al hacer scroll
+// Barra superior: transparente arriba del todo, translúcida al bajar
 (function(){
-  var els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  els.forEach(function(e){ io.observe(e); });
-  // Respaldo: si el observador no se dispara (pestaña en segundo plano, capturas), todo se muestra igual
-  setTimeout(function(){ els.forEach(function(e){ e.classList.add('in'); }); }, 2500);
+  var nav = document.querySelector('.globalnav');
+  var onScroll = function(){ nav.classList.toggle('top', window.scrollY < 8); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// Animaciones de scroll. Si GSAP no carga o el usuario pidió menos movimiento,
+// la página se queda tal cual: todo visible y sin animar.
+(function(){
+  if (!window.gsap || !window.ScrollTrigger) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+  var ease = 'power3.out';
+  var $$ = gsap.utils.toArray;
+
+  // 1. Entrada del hero
+  gsap.from('.hero > .wrap:first-child > *', { y: 30, opacity: 0, duration: 1, ease: ease, stagger: 0.08, delay: 0.1 });
+
+  // 2. MacBook: se endereza y crece mientras haces scroll
+  gsap.fromTo('.mac',
+    { rotateX: 24, scale: 0.86, y: 40, transformPerspective: 1400, transformOrigin: '50% 100%' },
+    { rotateX: 0, scale: 1, y: 0, ease: 'none',
+      scrollTrigger: { trigger: '.mac', start: 'top 95%', end: 'top 30%', scrub: 0.6 } });
+  gsap.from('.mac .chart i', { scaleY: 0, transformOrigin: '50% 100%', duration: 1, ease: ease, stagger: 0.06,
+    scrollTrigger: { trigger: '.mac', start: 'top 60%' } });
+  gsap.from('.mac .kpi', { y: 16, opacity: 0, duration: 0.8, ease: ease, stagger: 0.1,
+    scrollTrigger: { trigger: '.mac', start: 'top 65%' } });
+
+  // 3. Títulos de cada sección
+  $$('.head').forEach(function(h){
+    gsap.from(h.children, { y: 40, opacity: 0, duration: 1, ease: ease, stagger: 0.1,
+      scrollTrigger: { trigger: h, start: 'top 85%' } });
+  });
+
+  // 4. Contadores: las cifras suben desde 0 (+200, −50%, etc.)
+  $$('.numbers .big, .tile .stat b').forEach(function(el){
+    var m = el.textContent.trim().match(/^([+−-]?)(\d+)(%?)$/);
+    if (!m) return;
+    var obj = { v: 0 }, target = +m[2];
+    gsap.to(obj, { v: target, duration: 1.6, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+      onUpdate: function(){ el.textContent = m[1] + Math.round(obj.v) + m[3]; } });
+  });
+  gsap.from('.numbers > div', { y: 30, opacity: 0, duration: 0.9, ease: ease, stagger: 0.12,
+    scrollTrigger: { trigger: '.numbers', start: 'top 85%' } });
+
+  // 5. Tiles de proyectos: suben y el mockup tiene parallax
+  $$('.tile').forEach(function(t){
+    gsap.from(t, { y: 80, opacity: 0, scale: 0.96, duration: 1.1, ease: ease, clearProps: 'transform',
+      scrollTrigger: { trigger: t, start: 'top 92%' } });
+    gsap.from(t.querySelectorAll('.cat, h3, p, .meta, .stat, .date'), { y: 20, opacity: 0, duration: 0.8, ease: ease, stagger: 0.06,
+      scrollTrigger: { trigger: t, start: 'top 80%' } });
+    var art = t.querySelector('.art > *');
+    if (art) gsap.fromTo(art, { yPercent: 30 }, { yPercent: 0, ease: 'none',
+      scrollTrigger: { trigger: t, start: 'top bottom', end: 'bottom 75%', scrub: 0.6 } });
+  });
+
+  // 6. Stack, especificaciones y contacto en cascada
+  [['.chipcard', '.stack'], ['.row', '.specs'], ['.card', '.cards']].forEach(function(p){
+    gsap.from(p[0], { y: 40, opacity: 0, duration: 0.9, ease: ease, stagger: 0.1,
+      scrollTrigger: { trigger: p[1], start: 'top 85%' } });
+  });
+
+  // 7. Sobre mí: las palabras se iluminan una a una al hacer scroll
+  var words = [];
+  $$('.statement p').forEach(function(p){
+    var walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT), nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function(n){
+      var frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(function(part){
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        var s = document.createElement('span'); s.className = 'w'; s.textContent = part;
+        frag.appendChild(s); words.push(s);
+      });
+      n.parentNode.replaceChild(frag, n);
+    });
+  });
+  gsap.fromTo(words, { opacity: 0.15 }, { opacity: 1, ease: 'none', stagger: 0.1,
+    scrollTrigger: { trigger: '.statement', start: 'top 80%', end: 'bottom 50%', scrub: true } });
 })();
 </script>
 </body>
