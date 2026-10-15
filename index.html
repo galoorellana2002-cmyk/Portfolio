@@ -3,430 +3,541 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Alejandro Orellana · Fullstack Developer">
 <meta property="og:description" content="Desarrollador fullstack en Quito, Ecuador. React, Node.js, MongoDB y AWS.">
 <meta property="og:url" content="https://alejandroorellana.dev">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141618'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23f4f5f6'%3EA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#fbfbfd">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231d1d1f'/%3E%3Ctext x='32' y='43' font-family='-apple-system,Helvetica,Arial,sans-serif' font-weight='600' font-size='32' text-anchor='middle' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
 <title>Alejandro Orellana · Fullstack Developer</title>
 <meta name="description" content="Portafolio de Galo Alejandro Orellana, desarrollador fullstack en Quito, Ecuador.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: una columna centrada (max 1120px) sobre fondo gris con un halo oscuro arriba,
-   nav en píldora flotante, hero tipográfico, cinta en movimiento y tarjetas de proyecto con "pantallas" dibujadas en CSS. */
+/* Estilo Apple: barra global translúcida, hero centrado con un MacBook dibujado en CSS,
+   franjas que alternan blanco / gris / negro, tiles tipo bento con radio grande
+   y una tabla de "Especificaciones" al estilo de las páginas de producto. */
 :root{
-  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#e4e5e7;
-  --bg-2:#d5d7da;
-  --surface:#eef0f1;
-  --ink:#141618;
-  --ink-2:#4a4f55;
-  --line:#c5c8cc;
-  --halo:#8b8f95;
-  --pill:#ffffffb3;
-  --btn:#141618;
-  --btn-ink:#f4f5f6;
-  --serif:"Instrument Serif","Iowan Old Style",Georgia,serif;
-  --sans:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --white:#ffffff;
+  --paper:#fbfbfd;
+  --gray:#f5f5f7;
+  --ink:#1d1d1f;
+  --ink-2:#6e6e73;
+  --ink-3:#86868b;
+  --line:#d2d2d7;
+  --black:#000000;
+  --tile-dark:#161617;
+  --ink-on-dark:#f5f5f7;
+  --ink-2-on-dark:#a1a1a6;
+  --line-dark:#424245;
+  --blue:#0071e3;
+  --link:#0066cc;
+  --link-dark:#2997ff;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --radius:28px;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#151618;--bg-2:#1c1e21;--surface:#1f2124;--ink:#eceef0;--ink-2:#9ba1a8;
-    --line:#2f3236;--halo:#3d4248;--pill:#26292dcc;--btn:#eceef0;--btn-ink:#141618;color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#151618;--bg-2:#1c1e21;--surface:#1f2124;--ink:#eceef0;--ink-2:#9ba1a8;
-  --line:#2f3236;--halo:#3d4248;--pill:#26292dcc;--btn:#eceef0;--btn-ink:#141618;color-scheme:dark;
-}
-
 *{box-sizing:border-box}
-body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--paper)}
 body{
-  background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+  margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);
+  font-size:17px;line-height:1.47;letter-spacing:-.022em;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-a{color:inherit}
-:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:8px}
 .wrap{
-  max-width:1120px;margin:0 auto;
-  padding-left:max(20px, env(safe-area-inset-left, 0px));
-  padding-right:max(20px, env(safe-area-inset-right, 0px));
+  max-width:1024px;margin:0 auto;
+  padding-left:max(22px, env(safe-area-inset-left, 0px));
+  padding-right:max(22px, env(safe-area-inset-right, 0px));
 }
+.wide{max-width:1260px}
 
-/* ---------- Hero band ---------- */
-.hero-band{
-  position:relative;isolation:isolate;
-  background:linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 100%);
-  padding-block:20px 56px;overflow:hidden;
+/* ---------- Barra global ---------- */
+.globalnav{
+  position:sticky;top:0;z-index:50;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(251,251,253,.8);
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.08);
 }
-.hero-band::before{
-  content:"";position:absolute;z-index:-1;inset:-30% -10% auto 25%;height:520px;
-  background:radial-gradient(closest-side,var(--halo),transparent 70%);
-  opacity:.75;filter:blur(30px);
+.globalnav .wrap{height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.brand:hover{text-decoration:none}
+.brand i{width:22px;height:22px;border-radius:6px;background:var(--ink);color:#fff;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:600}
+.navlinks{display:flex;gap:30px;font-size:12px;letter-spacing:-.01em}
+.navlinks a{color:var(--ink);opacity:.8}
+.navlinks a:hover{opacity:1;text-decoration:none}
+.pill{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--blue);color:#fff;border-radius:980px;border:0;
+  font-family:inherit;font-size:17px;letter-spacing:-.022em;padding:11px 22px;cursor:pointer;
+  transition:background .2s ease;
 }
-nav{
-  position:sticky;top:calc(env(safe-area-inset-top, 0px) + 14px);z-index:10;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  max-width:560px;margin:0 auto;padding:6px 6px 6px 18px;
-  background:var(--pill);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border:1px solid var(--line);border-radius:999px;
-}
-.logo{font-family:var(--serif);font-size:1.45rem;text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center;gap:6px}
-.logo span{font-family:var(--mono);font-size:.7rem;color:var(--ink-2)}
-.nav-links{display:flex;align-items:center;gap:4px;font-size:.9rem}
-.nav-links a{text-decoration:none;color:var(--ink-2);padding:8px 10px;border-radius:999px}
-.nav-links a:hover{color:var(--ink)}
-.nav-links a.cta{background:var(--btn);color:var(--btn-ink);padding:9px 16px}
+.pill:hover{background:#0077ed;text-decoration:none}
+.pill.sm{font-size:12px;padding:4px 12px}
+.pill.ghost{background:transparent;color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.pill.ghost:hover{background:var(--blue);color:#fff}
+.more::after{content:" ›";font-size:1.1em}
 
-.hero{padding-block:88px 40px;display:grid;grid-template-columns:1fr;gap:40px}
-.status{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink-2)}
-.dot{flex:none;width:8px;height:8px;border-radius:50%;background:#2fa36b;box-shadow:0 0 0 4px #2fa36b33;animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 7px #2fa36b14}}
+/* ---------- Hero ---------- */
+.hero{text-align:center;padding-block:72px 0;overflow:hidden;background:var(--paper)}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-2);margin-bottom:14px}
+.dot{width:7px;height:7px;border-radius:50%;background:#30d158;flex:none}
+.eyebrow{font-size:21px;font-weight:600;letter-spacing:.004em;margin:0;
+  background:linear-gradient(90deg,#0071e3,#7a5af8 50%,#e3428a);-webkit-background-clip:text;background-clip:text;color:transparent}
 h1{
-  font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,6.4vw,5rem);line-height:1.02;
-  letter-spacing:-.02em;margin:18px 0 0;max-width:15ch;text-wrap:balance;
+  font-size:clamp(48px,9vw,96px);line-height:1.04;font-weight:700;letter-spacing:-.045em;
+  margin:6px 0 0;text-wrap:balance;
 }
-h1 em{font-style:italic;color:var(--ink-2)}
-.hero-side{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px}
-.hero-side p{max-width:46ch;margin:0;color:var(--ink-2);font-size:1.02rem}
-.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-size:.95rem;
-  text-decoration:none;border:1px solid var(--ink);font-family:inherit;cursor:pointer;background:transparent;color:var(--ink);
-  transition:transform .2s ease;
-}
-.btn:hover{transform:translateY(-2px)}
-.btn.solid{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.hero .sub{font-size:clamp(21px,2.6vw,28px);line-height:1.2;font-weight:500;color:var(--ink);margin:14px auto 0;max-width:24ch;text-wrap:balance;letter-spacing:-.02em}
+.hero .lede{font-size:17px;color:var(--ink-2);max-width:52ch;margin:16px auto 0}
+.ctas{display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap;margin-top:28px;font-size:17px}
 
+/* MacBook en CSS */
+.mac{width:min(860px,100%);margin:64px auto 0;position:relative}
+.mac .lid{
+  background:#0d0d0f;border-radius:22px 22px 0 0;padding:14px 14px 18px;
+  box-shadow:0 0 0 1.5px #c9cacf, 0 40px 80px -30px rgba(0,0,0,.35);
+}
+.mac .lid::before{content:"";position:absolute;left:50%;top:6px;width:7px;height:7px;border-radius:50%;background:#2a2a2e;transform:translateX(-50%)}
+.mac .display{aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#f5f5f7;display:grid;grid-template-columns:22% 1fr;text-align:left}
+.mac .base{height:16px;margin:0 -7%;border-radius:0 0 18px 18px;
+  background:linear-gradient(180deg,#e3e4e8,#b9bbc1 70%,#8e9096);position:relative}
+.mac .base::before{content:"";position:absolute;left:50%;top:0;width:16%;height:6px;border-radius:0 0 8px 8px;background:#a9abb1;transform:translateX(-50%)}
+.side{background:#e9e9ee;padding:7% 10%;display:flex;flex-direction:column;gap:9px}
+.side b{height:9px;border-radius:5px;background:#d4d4da}
+.side b:first-child{width:60%;height:12px;background:#1d1d1f;margin-bottom:10px}
+.side b.on{background:#0071e3}
+.main{padding:5% 5%;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:min-content;gap:3%}
+.main .t{grid-column:1/-1;font-weight:700;font-size:clamp(10px,2.2vw,22px);letter-spacing:-.03em;color:#1d1d1f}
+.kpi{background:#fff;border-radius:10px;padding:10% 12%;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.kpi small{display:block;font-size:clamp(5px,1vw,10px);color:#86868b}
+.kpi strong{font-size:clamp(9px,2vw,20px);letter-spacing:-.03em;color:#1d1d1f}
+.chart{grid-column:1/-1;background:#fff;border-radius:10px;height:clamp(60px,14vw,150px);padding:4%;display:flex;align-items:flex-end;gap:3%;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.chart i{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#5e9eff,#0071e3)}
 
-/* ---------- Sections ---------- */
-section{padding-block:96px 0}
-.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
-h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,4.4vw,3.3rem);line-height:1.05;letter-spacing:-.015em;margin:10px 0 0;text-wrap:balance}
-.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:40px}
-.sec-head p{max-width:40ch;margin:0;color:var(--ink-2)}
+/* ---------- Secciones ---------- */
+section{padding-block:110px}
+.gray{background:var(--gray)}
+.dark{background:var(--black);color:var(--ink-on-dark)}
+.head{text-align:center;max-width:780px;margin:0 auto 56px}
+h2{font-size:clamp(40px,6vw,64px);line-height:1.06;font-weight:700;letter-spacing:-.04em;margin:0;text-wrap:balance}
+.head p{font-size:clamp(19px,2.2vw,24px);line-height:1.3;color:var(--ink-2);margin:16px auto 0;max-width:36ch;font-weight:500;text-wrap:balance}
+.dark .head p{color:var(--ink-2-on-dark)}
 
-/* ---------- Projects ---------- */
-.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-.card{
-  background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:12px;
-  display:flex;flex-direction:column;gap:18px;transition:transform .35s cubic-bezier(.2,.7,.2,1);
+/* Números */
+.numbers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;text-align:center}
+.numbers div{display:grid;gap:4px;align-content:start}
+.big{font-size:clamp(44px,6vw,72px);font-weight:700;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums;
+  background:linear-gradient(180deg,#1d1d1f 40%,#6e6e73);-webkit-background-clip:text;background-clip:text;color:transparent}
+.numbers span{font-size:15px;color:var(--ink-2);max-width:20ch;margin:6px auto 0;line-height:1.35}
+
+/* ---------- Tiles de proyectos ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tile{
+  position:relative;border-radius:var(--radius);overflow:hidden;background:var(--white);
+  padding:52px 40px 0;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:620px;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1);
 }
-.card:hover{transform:translateY(-4px)}
-.card.wide{grid-column:span 2}
-.screen{
-  position:relative;aspect-ratio:16/10;max-width:100%;border-radius:14px;overflow:hidden;
-  background:var(--c1);display:grid;place-items:center;
-}
-.card.wide .screen{aspect-ratio:21/9}
-.screen::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 85% 0%,#ffffff40,transparent 55%)}
-.win{
-  position:relative;width:78%;height:72%;border-radius:10px;background:#fbfbfc;box-shadow:0 22px 50px -18px #0007;
-  display:grid;grid-template-rows:22px 1fr;overflow:hidden;color:#16181a;
-  transform:translateY(14%);transition:transform .5s cubic-bezier(.2,.7,.2,1);
-}
-.card:hover .win{transform:translateY(8%)}
-.bar{display:flex;gap:5px;align-items:center;padding-left:9px;background:#eceef0}
-.bar i{width:7px;height:7px;border-radius:50%;background:#c9ccd0}
-.ui{padding:12px;display:grid;gap:8px;align-content:start;grid-template-columns:repeat(var(--cols,3),1fr)}
-.ui b{display:block;height:var(--h,34px);border-radius:6px;background:var(--c2)}
-.ui b.full{grid-column:1/-1}
-.ui b.half{grid-column:span 2}
-.ui b.soft{background:#e7e9ec}
-.ui .big{grid-column:1/-1;font-family:var(--serif);font-size:clamp(1rem,2.4vw,1.6rem);line-height:1;padding:2px 0 4px}
-.metric{
-  position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:.72rem;color:#fff;
-  background:#0000004d;backdrop-filter:blur(6px);padding:5px 10px;border-radius:999px;
-}
-.card-body{padding:0 8px 8px;display:grid;gap:10px}
-.card-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.card h3{font-family:var(--serif);font-weight:400;font-size:1.65rem;line-height:1.1;margin:0}
-.date{font-family:var(--mono);font-size:.75rem;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
-.card p{margin:0;color:var(--ink-2);font-size:.95rem;max-width:62ch}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-family:var(--mono);font-size:.7rem;padding:4px 9px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+.tile:hover{transform:scale(1.008)}
+.tile.full{grid-column:1/-1;min-height:660px}
+.tile.on-gray{background:var(--gray)}
+.tile.black{background:var(--tile-dark);color:var(--ink-on-dark)}
+.tile .cat{font-size:14px;font-weight:600;color:var(--ink-2);letter-spacing:-.01em}
+.tile.black .cat{color:var(--ink-2-on-dark)}
+.tile h3{font-size:clamp(32px,4vw,48px);line-height:1.08;font-weight:700;letter-spacing:-.04em;margin:6px 0 0;text-wrap:balance}
+.tile p{font-size:19px;line-height:1.35;margin:10px auto 0;max-width:30ch;color:var(--ink);font-weight:400;text-wrap:balance}
+.tile.black p{color:var(--ink-on-dark)}
+.tile .meta{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;margin-top:14px;font-size:14px;color:var(--ink-2)}
+.tile.black .meta{color:var(--ink-2-on-dark)}
+.tile .meta span + span::before{content:"·";margin-right:14px;opacity:.6}
+.tile .stat{margin-top:22px;display:grid;gap:2px}
+.tile .stat b{font-size:clamp(40px,5vw,56px);letter-spacing:-.05em;line-height:1;font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tile .stat small{font-size:14px;color:var(--ink-2)}
+.tile.black .stat small{color:var(--ink-2-on-dark)}
+.tile .date{font-size:12px;color:var(--ink-3);margin-top:10px;font-variant-numeric:tabular-nums}
+.art{margin-top:auto;padding-top:36px;width:100%;display:flex;justify-content:center}
+
+/* Visuales dentro de los tiles */
+.phone{width:220px;height:300px;border-radius:40px 40px 0 0;background:#1d1d1f;padding:10px 10px 0;box-shadow:0 0 0 1.5px #3a3a3c}
+.phone .scr{height:100%;border-radius:31px 31px 0 0;background:#fff;padding:34px 14px 0;display:flex;flex-direction:column;gap:8px;text-align:left;position:relative;overflow:hidden}
+.phone .scr::before{content:"";position:absolute;top:10px;left:50%;width:70px;height:20px;border-radius:12px;background:#1d1d1f;transform:translateX(-50%)}
+.bub{font-size:11px;line-height:1.3;padding:8px 11px;border-radius:16px;max-width:82%;letter-spacing:-.01em}
+.bub.me{align-self:flex-end;background:#0071e3;color:#fff;border-bottom-right-radius:5px}
+.bub.ai{align-self:flex-start;background:#e9e9eb;color:#1d1d1f;border-bottom-left-radius:5px}
+.window{width:min(440px,100%);border-radius:14px 14px 0 0;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 20px 50px -20px rgba(0,0,0,.25);overflow:hidden;text-align:left}
+.tile.black .window{background:#2c2c2e;box-shadow:0 0 0 1px #3a3a3c}
+.window .bar{height:28px;display:flex;align-items:center;gap:6px;padding-left:12px;background:rgba(0,0,0,.03)}
+.window .bar i{width:10px;height:10px;border-radius:50%}
+.window .bar i:nth-child(1){background:#ff5f57}.window .bar i:nth-child(2){background:#febc2e}.window .bar i:nth-child(3){background:#28c840}
+.window .body{padding:18px;display:grid;gap:10px;grid-template-columns:repeat(var(--c,3),1fr);min-height:190px;align-content:start}
+.window .body b{display:block;height:var(--h,40px);border-radius:10px;background:var(--fill,#f2f2f5)}
+.tile.black .window .body b{background:var(--fill,#3a3a3c)}
+.window .body .span{grid-column:1/-1}
+.window .body .two{grid-column:span 2}
 
 /* ---------- Stack ---------- */
-.stack{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
-.stack div{padding:24px 20px 24px 0;border-bottom:1px solid var(--line);display:grid;gap:10px;align-content:start}
-.stack h4{margin:0;font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
-.stack ul{list-style:none;padding:0;margin:0;display:grid;gap:4px;font-size:1.05rem}
+.stack{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.chipcard{background:var(--white);border-radius:20px;padding:26px 24px;display:grid;gap:14px;align-content:start}
+.glyph{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;letter-spacing:-.02em;background:var(--g)}
+.chipcard h4{margin:0;font-size:21px;font-weight:600;letter-spacing:-.025em}
+.chipcard ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px;color:var(--ink-2)}
 
-/* ---------- About ---------- */
-.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:56px;align-items:start}
-.portrait{
-  aspect-ratio:4/5;max-width:100%;border-radius:22px;border:1px solid var(--line);
-  background:linear-gradient(160deg,var(--bg-2),var(--surface));display:grid;place-items:center;position:relative;overflow:hidden;
-}
-.portrait span{font-family:var(--serif);font-size:clamp(5rem,14vw,9rem);color:var(--ink-2);letter-spacing:-.04em}
-.portrait small{position:absolute;bottom:14px;left:16px;font-family:var(--mono);font-size:.72rem;color:var(--ink-2)}
-.about-text{display:grid;gap:28px}
-.lead{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.25;margin:0;text-wrap:pretty}
-.timeline{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-.timeline li{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding-block:14px;border-bottom:1px solid var(--line)}
-.timeline .date{padding-top:3px}
-.timeline strong{font-weight:600;display:block}
-.timeline span{color:var(--ink-2);font-size:.95rem}
-.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-.cols ul{padding-left:18px;margin:8px 0 0;color:var(--ink-2);display:grid;gap:3px}
-.note{padding:20px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
-.note p{margin:6px 0 0;color:var(--ink-2)}
+/* ---------- Sobre mí ---------- */
+.statement{max-width:900px;margin:0 auto;text-align:left}
+.statement p{font-size:clamp(28px,4vw,48px);line-height:1.12;font-weight:600;letter-spacing:-.035em;margin:0;color:var(--ink-2-on-dark)}
+.statement p strong{color:var(--ink-on-dark);font-weight:600}
+.statement p + p{margin-top:28px}
 
-/* ---------- Contact ---------- */
-.contact{margin-top:110px;background:var(--btn);color:var(--btn-ink)}
-.contact .wrap{padding-block:88px 40px;display:grid;gap:44px}
-.contact h2{font-size:clamp(2.6rem,7vw,5.4rem);max-width:13ch}
-.contact .eyebrow{color:inherit;opacity:.65}
-.rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:color-mix(in srgb,var(--btn-ink) 22%,transparent);border-block:1px solid color-mix(in srgb,var(--btn-ink) 22%,transparent)}
-.rows > div{background:var(--btn);padding:20px 20px 20px 0;display:grid;gap:6px;min-width:0}
-.rows small{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
-.rows .val{font-size:1.1rem;overflow-wrap:anywhere;user-select:all}
-.copy{justify-self:start;font-family:var(--mono);font-size:.72rem;background:transparent;color:inherit;border:1px solid color-mix(in srgb,var(--btn-ink) 35%,transparent);border-radius:999px;padding:5px 11px;cursor:pointer}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.85rem;opacity:.6}
+/* ---------- Especificaciones ---------- */
+.specs{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:24px;padding-block:32px;border-bottom:1px solid var(--line)}
+.row h3{margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em}
+.row .cells{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 32px}
+.row .cells.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.row strong{display:block;font-size:17px;font-weight:600}
+.row span,.row li{color:var(--ink-2);font-size:15px}
+.row ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.yr{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;display:block;margin-top:2px}
+
+/* ---------- Contacto ---------- */
+.contact{text-align:center}
+.contact h2{font-size:clamp(44px,7vw,80px)}
+.contact .head p{max-width:40ch}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:900px;margin:0 auto}
+.card{background:var(--white);border-radius:20px;padding:28px 22px;display:grid;gap:8px;justify-items:center;min-width:0}
+.card small{font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.card .val{font-size:16px;font-weight:600;letter-spacing:-.02em;overflow-wrap:anywhere;user-select:all}
+.copy{font-family:inherit;font-size:14px;color:var(--link);background:none;border:0;cursor:pointer;padding:4px}
+.copy:hover{text-decoration:underline}
+
+footer{background:var(--gray);color:var(--ink-2);font-size:12px;border-top:1px solid var(--line)}
+footer .wrap{padding-block:20px 28px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+footer a{color:var(--ink-2)}
+
+/* ---------- Animación al hacer scroll (solo si hay JS) ---------- */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
 
 /* ---------- Responsive ---------- */
-@media (max-width:860px){
-  .projects{grid-template-columns:minmax(0,1fr)}
-  .card.wide{grid-column:auto}
-  .card.wide .screen{aspect-ratio:16/10}
+@media (max-width:1000px){
   .stack{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .about{grid-template-columns:minmax(0,1fr)}
-  .portrait{max-width:320px}
-  .rows{grid-template-columns:minmax(0,1fr)}
+  .numbers{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px}
 }
-@media (max-width:520px){
-  .nav-links a:not(.cta){display:none}
-  .hero{padding-block:64px 32px}
-  .cols{grid-template-columns:minmax(0,1fr)}
-  .timeline li{grid-template-columns:minmax(0,1fr);gap:2px}
-  .win{width:88%}
+@media (max-width:820px){
+  .navlinks{display:none}
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .tile,.tile.full{min-height:560px;padding:44px 24px 0}
+  .row{grid-template-columns:minmax(0,1fr);gap:16px}
+  .row .cells.three{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  section{padding-block:80px}
+}
+@media (max-width:480px){
+  .row .cells,.row .cells.three{grid-template-columns:minmax(0,1fr)}
+  .stack{grid-template-columns:minmax(0,1fr)}
+  .phone{width:200px;height:270px}
+  .mac .lid{padding:8px 8px 10px;border-radius:14px 14px 0 0}
 }
 @media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
+  *{transition:none!important;animation:none!important}
+  .js .reveal{opacity:1;transform:none}
   html{scroll-behavior:auto}
 }
 </style>
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<div class="hero-band">
-  <div class="wrap">
-    <nav aria-label="Principal">
-      <a class="logo" href="#inicio">alejandro<span>.dev</span></a>
-      <div class="nav-links">
-        <a href="#proyectos">Proyectos</a>
-        <a href="#sobre-mi">Sobre mí</a>
-        <a class="cta" href="#contacto">Contáctame</a>
-      </div>
-    </nav>
 
-    <header class="hero" id="inicio">
-      <div>
-        <div class="status"><span class="dot" aria-hidden="true"></span><span>Disponible para nuevas oportunidades · Quito, Ecuador</span></div>
-        <h1>Soy Alejandro, desarrollador fullstack que <em>construye</em> apps web que escalan</h1>
-      </div>
-      <div class="hero-side">
-        <div class="hero-actions">
-          <a class="btn solid" href="#proyectos">Ver proyectos ↓</a>
-          <a class="btn" href="#contacto">Escríbeme</a>
-        </div>
-        <p>Trabajo con React, Node.js, MongoDB y AWS. He creado sistemas de inventario, e‑commerce, apps con IA y mejoras de UX/UI para empresas de Ecuador y Estados Unidos.</p>
-      </div>
-    </header>
+<nav class="globalnav" aria-label="Principal">
+  <div class="wrap">
+    <a class="brand" href="#inicio"><i aria-hidden="true">A</i>Alejandro Orellana</a>
+    <div class="navlinks">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#stack">Stack</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#especificaciones">Especificaciones</a>
+    </div>
+    <a class="pill sm" href="#contacto">Contáctame</a>
   </div>
+</nav>
 
-</div>
-
-<main class="wrap">
-  <section id="proyectos" style="padding-top:64px">
-    <div class="projects">
-
-      <article class="card wide">
-        <div class="screen" style="--c1:linear-gradient(135deg,#2b2a4a,#5a4fb0);--c2:#6c5ce7">
-          <span class="metric">+200 usuarios el primer mes</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui" style="--cols:4"><div class="big">¿En qué te ayudo hoy?</div><b class="full soft" style="--h:26px"></b><b class="half" style="--h:22px"></b><b class="soft"></b><b class="soft"></b></div>
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div class="status"><span class="dot" aria-hidden="true"></span>Disponible para nuevas oportunidades</div>
+    <p class="eyebrow">Fullstack Developer</p>
+    <h1>Alejandro Orellana.</h1>
+    <p class="sub">Apps web que escalan. Pensadas para las personas.</p>
+    <p class="lede">Desarrollo con React, Node.js, MongoDB y AWS desde Quito, Ecuador. He trabajado en sistemas de inventario, e‑commerce, apps con IA y mejoras de UX/UI para empresas de Ecuador y Estados Unidos.</p>
+    <div class="ctas">
+      <a class="pill" href="#proyectos">Ver proyectos</a>
+      <a class="more" href="#contacto">Hablemos</a>
+    </div>
+  </div>
+  <div class="wrap wide">
+    <div class="mac reveal" aria-hidden="true">
+      <div class="lid">
+        <div class="display">
+          <div class="side"><b></b><b class="on"></b><b></b><b></b><b></b><b></b></div>
+          <div class="main">
+            <div class="t">Inventario</div>
+            <div class="kpi"><small>Productos</small><strong>312</strong></div>
+            <div class="kpi"><small>Alertas hoy</small><strong>4</strong></div>
+            <div class="kpi"><small>Errores</small><strong>−50%</strong></div>
+            <div class="chart"><i style="height:38%"></i><i style="height:55%"></i><i style="height:47%"></i><i style="height:68%"></i><i style="height:60%"></i><i style="height:82%"></i><i style="height:74%"></i><i style="height:95%"></i></div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Engagement Growth</h3><span class="date">04/2025 – Presente</span></div>
-          <p>Aplicación web con IA para asistencia personalizada. Me encargué del frontend, la conexión con APIs de IA y la optimización de rendimiento.</p>
-          <div class="chips"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Material UI</span><span class="chip">APIs de IA</span></div>
+      </div>
+      <div class="base"></div>
+    </div>
+  </div>
+</header>
+
+<section class="gray" aria-labelledby="numeros">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 id="numeros">Resultados que se miden.</h2>
+      <p>Cada proyecto empezó con un problema real y terminó con un número.</p>
+    </div>
+    <div class="numbers reveal">
+      <div><span class="big">8</span><span>proyectos entregados en 2024 y 2025</span></div>
+      <div><span class="big">+200</span><span>usuarios en el primer mes de una app con IA</span></div>
+      <div><span class="big">−50%</span><span>errores manuales en un sistema contable</span></div>
+      <div><span class="big">+25%</span><span>satisfacción de usuario en Busch Gardens</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos" aria-labelledby="proy-title">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 id="proy-title">Proyectos.</h2>
+      <p>Del frontend a la nube, para clientes en Ecuador y Estados Unidos.</p>
+    </div>
+  </div>
+  <div class="wrap wide">
+    <div class="grid">
+
+      <article class="tile black full reveal" style="--grad:linear-gradient(90deg,#a78bfa,#f472b6)">
+        <span class="cat">App web con IA</span>
+        <h3>Engagement Growth</h3>
+        <p>Asistencia personalizada con IA, rápida desde el primer clic.</p>
+        <div class="meta"><span>React</span><span>Vite</span><span>Material UI</span><span>APIs de IA</span></div>
+        <div class="stat"><b>+200</b><small>usuarios en el primer mes</small></div>
+        <span class="date">04/2025 – Presente</span>
+        <div class="art" aria-hidden="true">
+          <div class="phone"><div class="scr">
+            <span class="bub me">Necesito ayuda para organizar mi semana</span>
+            <span class="bub ai">Claro. Veo 3 reuniones el martes. ¿Bloqueo la mañana del miércoles para trabajo profundo?</span>
+            <span class="bub me">Sí, perfecto</span>
+          </div></div>
         </div>
       </article>
 
-      <article class="card">
-        <div class="screen" style="--c1:linear-gradient(135deg,#1f2a36,#45607a);--c2:#2e4a66">
-          <span class="metric">−40% en tiempos de consulta</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui"><b class="full" style="--h:18px"></b><b class="soft"></b><b class="soft"></b><b class="soft"></b><b class="half soft" style="--h:44px"></b><b style="--h:44px"></b></div>
+      <article class="tile on-gray reveal" style="--grad:linear-gradient(90deg,#0071e3,#00a1ff)">
+        <span class="cat">Backend · Firma de abogados</span>
+        <h3>Prestige Law</h3>
+        <p>Gestión de casos con panel administrativo en la nube.</p>
+        <div class="meta"><span>React</span><span>AWS</span><span>HTML/CSS</span></div>
+        <div class="stat"><b>−40%</b><small>en tiempos de consulta</small></div>
+        <span class="date">04/2025 – Presente</span>
+        <div class="art" aria-hidden="true">
+          <div class="window"><div class="bar"><i></i><i></i><i></i></div>
+            <div class="body"><b class="span" style="--h:22px;--fill:#1d1d1f;width:40%"></b><b></b><b></b><b></b><b class="two" style="--h:70px"></b><b style="--h:70px;--fill:#0071e3"></b></div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Prestige Law</h3><span class="date">04/2025 – Presente</span></div>
-          <p>Sistema de gestión de casos para una firma de abogados. Backend, despliegue en la nube y panel administrativo.</p>
-          <div class="chips"><span class="chip">React</span><span class="chip">AWS</span><span class="chip">HTML/CSS</span></div>
         </div>
       </article>
 
-      <article class="card">
-        <div class="screen" style="--c1:linear-gradient(135deg,#7a3b3b,#d9765f);--c2:#e0866d">
-          <span class="metric">+50 propiedades</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui"><b style="--h:46px"></b><b style="--h:46px"></b><b style="--h:46px"></b><b class="soft" style="--h:10px"></b><b class="soft" style="--h:10px"></b><b class="soft" style="--h:10px"></b></div>
+      <article class="tile black reveal" style="--grad:linear-gradient(90deg,#ff7a59,#ffb36b)">
+        <span class="cat">Fullstack · Estilo Airbnb</span>
+        <h3>Rent Ease</h3>
+        <p>Alquileres con mapa interactivo, filtros y login seguro.</p>
+        <div class="meta"><span>React</span><span>Express</span><span>MongoDB</span><span>JWT</span></div>
+        <div class="stat"><b>+50</b><small>propiedades registradas</small></div>
+        <span class="date">09/2024 – 05/2025</span>
+        <div class="art" aria-hidden="true">
+          <div class="window"><div class="bar"><i></i><i></i><i></i></div>
+            <div class="body"><b style="--h:76px;--fill:linear-gradient(135deg,#ff7a59,#ffb36b)"></b><b style="--h:76px;--fill:linear-gradient(135deg,#5ac8fa,#007aff)"></b><b style="--h:76px;--fill:linear-gradient(135deg,#34c759,#a3e635)"></b><b style="--h:10px"></b><b style="--h:10px"></b><b style="--h:10px"></b></div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Rent Ease</h3><span class="date">09/2024 – 05/2025</span></div>
-          <p>App fullstack de alquiler estilo Airbnb con autenticación JWT, CRUD completo, filtros de búsqueda y mapa interactivo.</p>
-          <div class="chips"><span class="chip">React</span><span class="chip">Express</span><span class="chip">MongoDB</span><span class="chip">JWT</span></div>
         </div>
       </article>
 
-      <article class="card">
-        <div class="screen" style="--c1:linear-gradient(135deg,#7a1f2b,#c63a3a);--c2:#d24646">
-          <span class="metric">−30% pérdidas por desabastecimiento</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui" style="--cols:4"><b class="soft" style="--h:30px"></b><b class="soft" style="--h:30px"></b><b class="soft" style="--h:30px"></b><b style="--h:30px"></b><b class="full soft" style="--h:50px"></b></div>
+      <article class="tile black reveal" style="--grad:linear-gradient(90deg,#ff453a,#ff9f0a)">
+        <span class="cat">Análisis y desarrollo web</span>
+        <h3>X Games · Arca Continental</h3>
+        <p>Stock con alertas automáticas y dashboard en tiempo real.</p>
+        <div class="meta"><span>Roles</span><span>Reportes diarios</span><span>Base de datos</span></div>
+        <div class="stat"><b>−30%</b><small>pérdidas por desabastecimiento</small></div>
+        <span class="date">09/2024</span>
+        <div class="art" aria-hidden="true">
+          <div class="window"><div class="bar"><i></i><i></i><i></i></div>
+            <div class="body" style="--c:4"><b style="--h:46px"></b><b style="--h:46px"></b><b style="--h:46px"></b><b style="--h:46px;--fill:#ff453a"></b><b class="span" style="--h:84px"></b></div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>X Games · Arca Continental</h3><span class="date">09/2024</span></div>
-          <p>Gestión de stock con alertas automáticas de inventario, sistema de roles, reportes diarios y dashboard en tiempo real.</p>
-          <div class="chips"><span class="chip">Análisis</span><span class="chip">Base de datos</span><span class="chip">Dashboard</span></div>
         </div>
       </article>
 
-      <article class="card">
-        <div class="screen" style="--c1:linear-gradient(135deg,#0f4c4a,#2d9b8a);--c2:#36a893">
-          <span class="metric">+25% satisfacción de usuario</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui"><b class="full" style="--h:40px"></b><b class="soft" style="--h:24px"></b><b class="soft" style="--h:24px"></b><b class="soft" style="--h:24px"></b></div>
+      <article class="tile on-gray reveal" style="--grad:linear-gradient(90deg,#30d158,#0a84ff)">
+        <span class="cat">UX/UI · Estados Unidos</span>
+        <h3>Busch Gardens</h3>
+        <p>Flujos rediseñados, prototipos en Figma y pruebas con usuarios.</p>
+        <div class="meta"><span>Figma</span><span>Prototipado</span><span>Usabilidad</span></div>
+        <div class="stat"><b>+25%</b><small>en satisfacción de usuario</small></div>
+        <span class="date">10/2024 – 03/2025</span>
+        <div class="art" aria-hidden="true">
+          <div class="window"><div class="bar"><i></i><i></i><i></i></div>
+            <div class="body"><b class="span" style="--h:80px;--fill:linear-gradient(135deg,#30d158,#0a84ff)"></b><b style="--h:30px"></b><b style="--h:30px"></b><b style="--h:30px"></b></div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Busch Gardens (EE. UU.)</h3><span class="date">10/2024 – 03/2025</span></div>
-          <p>Mejoras de UX/UI: rediseño de flujos de usuario, prototipado en Figma y pruebas de usabilidad.</p>
-          <div class="chips"><span class="chip">UX/UI</span><span class="chip">Figma</span><span class="chip">Testing</span></div>
         </div>
       </article>
 
-      <article class="card wide">
-        <div class="screen" style="--c1:linear-gradient(135deg,#1c2b20,#4f7d3a);--c2:#6aa84f">
-          <span class="metric">+300 productos en catálogo</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui" style="--cols:5"><b class="full soft" style="--h:16px"></b><b style="--h:44px"></b><b class="soft" style="--h:44px"></b><b class="soft" style="--h:44px"></b><b class="soft" style="--h:44px"></b><b class="soft" style="--h:44px"></b></div>
+      <article class="tile on-gray full reveal" style="--grad:linear-gradient(90deg,#1d1d1f,#6e6e73)">
+        <span class="cat">E‑commerce</span>
+        <h3>Tienda de componentes electrónicos</h3>
+        <p>Catálogo, carrito, pasarela de pagos y panel de administración.</p>
+        <div class="meta"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+        <div class="stat"><b>+300</b><small>productos en catálogo</small></div>
+        <span class="date">06/2024 – 09/2024</span>
+        <div class="art" aria-hidden="true">
+          <div class="window" style="width:min(640px,100%)"><div class="bar"><i></i><i></i><i></i></div>
+            <div class="body" style="--c:4"><b style="--h:90px"></b><b style="--h:90px"></b><b style="--h:90px"></b><b style="--h:90px"></b><b class="two" style="--h:12px"></b><b class="two" style="--h:12px;--fill:#0071e3"></b></div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Tienda de componentes electrónicos</h3><span class="date">06/2024 – 09/2024</span></div>
-          <p>E‑commerce completo con carrito de compras, pasarela de pagos y panel de administración.</p>
-          <div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div>
         </div>
       </article>
 
-      <article class="card">
-        <div class="screen" style="--c1:linear-gradient(135deg,#2a2d33,#70757e);--c2:#a2a7b0">
-          <span class="metric">+150 vehículos</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui"><b class="soft" style="--h:70px"></b><b class="half" style="--h:70px"></b></div>
+      <article class="tile on-gray reveal" style="--grad:linear-gradient(90deg,#636366,#1d1d1f)">
+        <span class="cat">Sitio web · Concesionaria</span>
+        <h3>Patio de Autos</h3>
+        <p>Catálogo dinámico con filtros y comparador de autos.</p>
+        <div class="meta"><span>React</span><span>Tailwind CSS</span></div>
+        <div class="stat"><b>+150</b><small>vehículos en catálogo</small></div>
+        <span class="date">03/2024 – 06/2024</span>
+        <div class="art" aria-hidden="true">
+          <div class="window"><div class="bar"><i></i><i></i><i></i></div>
+            <div class="body" style="--c:2"><b style="--h:100px"></b><b style="--h:100px"></b><b style="--h:12px"></b><b style="--h:12px"></b></div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Patio de Autos</h3><span class="date">03/2024 – 06/2024</span></div>
-          <p>Catálogo dinámico para concesionaria con filtros avanzados, comparador de autos y formulario con notificaciones automáticas.</p>
-          <div class="chips"><span class="chip">React</span><span class="chip">Tailwind CSS</span></div>
         </div>
       </article>
 
-      <article class="card">
-        <div class="screen" style="--c1:linear-gradient(135deg,#3a2f17,#b38a2e);--c2:#c79a35">
-          <span class="metric">−50% errores manuales</span>
-          <div class="win"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="ui" style="--cols:4"><b class="full soft" style="--h:14px"></b><b class="full soft" style="--h:14px"></b><b class="full soft" style="--h:14px"></b><b class="half" style="--h:22px"></b></div>
+      <article class="tile black reveal" style="--grad:linear-gradient(90deg,#ffd60a,#ff9f0a)">
+        <span class="cat">Sistema contable</span>
+        <h3>Inventarios Contables</h3>
+        <p>Control de stock con reportes y exportación a Excel y PDF.</p>
+        <div class="meta"><span>React</span><span>Node.js</span><span>SQL</span></div>
+        <div class="stat"><b>−50%</b><small>errores manuales</small></div>
+        <span class="date">01/2024 – 04/2024</span>
+        <div class="art" aria-hidden="true">
+          <div class="window"><div class="bar"><i></i><i></i><i></i></div>
+            <div class="body" style="--c:1"><b style="--h:16px"></b><b style="--h:16px"></b><b style="--h:16px"></b><b style="--h:16px"></b><b style="--h:30px;--fill:#ffd60a;width:45%"></b></div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Inventarios Contables</h3><span class="date">01/2024 – 04/2024</span></div>
-          <p>Control de stock con reportes automatizados y exportación a Excel y PDF.</p>
-          <div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">SQL</span></div>
         </div>
       </article>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="stack">
-    <div class="sec-head">
-      <div><div class="eyebrow">Stack</div><h2>Con qué trabajo</h2></div>
-      <p>Mi stack principal es React, Node.js, MongoDB y AWS. Ahora estoy sumando Python e IA.</p>
+<section class="gray" id="stack" aria-labelledby="stack-title">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 id="stack-title">Un stack completo.</h2>
+      <p>Del primer componente al despliegue en la nube.</p>
     </div>
-    <div class="stack">
-      <div><h4>Frontend</h4><ul><li>HTML5, CSS3</li><li>JavaScript</li><li>React</li><li>Tailwind CSS</li><li>Material UI</li></ul></div>
-      <div><h4>Backend y datos</h4><ul><li>Node.js, Express</li><li>MongoDB</li><li>Firebase</li><li>SQL</li><li>AWS</li></ul></div>
-      <div><h4>Herramientas</h4><ul><li>Git y GitHub</li><li>Postman</li><li>Vite, Webpack</li><li>VS Code</li><li>Figma</li></ul></div>
-      <div><h4>Aprendiendo</h4><ul><li>Python</li><li>IA aplicada (IBM)</li><li>Data Science</li><li>Flutter</li></ul></div>
+    <div class="stack reveal">
+      <div class="chipcard"><span class="glyph" style="--g:linear-gradient(135deg,#5ac8fa,#007aff)">Fe</span><h4>Frontend</h4><ul><li>HTML5 y CSS3</li><li>JavaScript</li><li>React</li><li>Tailwind CSS</li><li>Material UI</li></ul></div>
+      <div class="chipcard"><span class="glyph" style="--g:linear-gradient(135deg,#34c759,#00a86b)">Be</span><h4>Backend y datos</h4><ul><li>Node.js y Express</li><li>MongoDB</li><li>Firebase</li><li>SQL</li><li>AWS</li></ul></div>
+      <div class="chipcard"><span class="glyph" style="--g:linear-gradient(135deg,#ff9f0a,#ff453a)">Hr</span><h4>Herramientas</h4><ul><li>Git y GitHub</li><li>Postman</li><li>Vite y Webpack</li><li>VS Code</li><li>Figma</li></ul></div>
+      <div class="chipcard"><span class="glyph" style="--g:linear-gradient(135deg,#bf5af2,#5e5ce6)">IA</span><h4>Aprendiendo</h4><ul><li>Python</li><li>IA aplicada (IBM)</li><li>Data Science</li><li>Flutter</li></ul></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="sobre-mi">
-    <div class="about">
-      <div class="portrait" role="img" aria-label="Espacio para foto de Alejandro"><span>GA</span><small>Quito · EC</small></div>
-      <div class="about-text">
-        <div><div class="eyebrow">Sobre mí</div><h2>Código, personas y un poco de música</h2></div>
-        <p class="lead">Estudié Psicología antes de programar, y eso se nota en cómo diseño: pienso primero en quien va a usar el producto.</p>
+<section class="dark" id="sobre-mi" aria-label="Sobre mí">
+  <div class="wrap">
+    <div class="statement reveal">
+      <p>Antes de programar estudié <strong>Psicología.</strong></p>
+      <p>Por eso diseño pensando primero en <strong>quien va a usar el producto</strong>, y después en el código.</p>
+      <p>Fuera de la pantalla hago <strong>música</strong>: grabé un álbum en 2016 y enseñé instrumentos a niños.</p>
+    </div>
+  </div>
+</section>
 
-        <ol class="timeline" aria-label="Formación">
-          <li><span class="date">2025 – Presente</span><div><strong>Pontificia Universidad Católica</strong><span>Desarrollo de Software</span></div></li>
-          <li><span class="date">2024</span><div><strong>Kruger School</strong><span>Fullstack Developer · Finalizado</span></div></li>
-          <li><span class="date">2021 – 2024</span><div><strong>UDLA</strong><span>Psicología</span></div></li>
-          <li><span class="date">2014</span><div><strong>I.S.M Academy</strong><span>Certificación Cisco</span></div></li>
-        </ol>
-
-        <div class="cols">
-          <div>
-            <div class="eyebrow">Certificaciones</div>
-            <ul><li>IBM AI Developer Professional</li><li>Python for Data Science (IBM)</li><li>AI &amp; Development (IBM)</li><li>Python · Coursera (2025)</li><li>Flutter Development</li></ul>
-          </div>
-          <div>
-            <div class="eyebrow">Idiomas</div>
-            <ul><li>Español · nativo</li><li>Inglés · B2 (Bridford, 2025)</li></ul>
-            <div class="eyebrow" style="margin-top:20px">Cómo trabajo</div>
-            <ul><li>Comunicación clara</li><li>Trabajo en equipo</li><li>Pensamiento analítico</li><li>Resolución de problemas</li></ul>
-          </div>
+<section id="especificaciones" aria-labelledby="spec-title">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 id="spec-title">Especificaciones.</h2>
+      <p>Todo lo que necesitas saber, en una sola página.</p>
+    </div>
+    <div class="specs reveal">
+      <div class="row"><h3>Formación</h3>
+        <div class="cells">
+          <div><strong>Pontificia Universidad Católica</strong><span>Desarrollo de Software</span><span class="yr">2025 – Presente</span></div>
+          <div><strong>Kruger School</strong><span>Fullstack Developer</span><span class="yr">2024 · Finalizado</span></div>
+          <div><strong>UDLA</strong><span>Psicología</span><span class="yr">2021 – 2024</span></div>
+          <div><strong>I.S.M Academy</strong><span>Certificación Cisco</span><span class="yr">2014</span></div>
         </div>
-
-        <div class="note">
-          <div class="eyebrow">Fuera del código</div>
-          <p>En 2016 grabé y produje un álbum de música y enseñé instrumentos a niños en el programa Música Para Todos. También canté en un coro de Navidad que compitió a nivel institucional. Hoy sigo con la música, el gimnasio y el fútbol.</p>
+      </div>
+      <div class="row"><h3>Certificaciones</h3>
+        <div class="cells three">
+          <div><strong>IBM AI Developer</strong><span>Professional Certificate</span></div>
+          <div><strong>Python for Data Science</strong><span>IBM</span></div>
+          <div><strong>AI &amp; Development</strong><span>IBM</span></div>
+          <div><strong>Python</strong><span>Coursera</span><span class="yr">2025</span></div>
+          <div><strong>Flutter Development</strong><span>Desarrollo móvil</span></div>
+          <div><strong>Cisco Certification</strong><span>I.S.M Academy</span><span class="yr">2014</span></div>
+        </div>
+      </div>
+      <div class="row"><h3>Idiomas</h3>
+        <div class="cells">
+          <div><strong>Español</strong><span>Nativo</span></div>
+          <div><strong>Inglés</strong><span>B2 · Bridford Academy</span><span class="yr">2025</span></div>
+        </div>
+      </div>
+      <div class="row"><h3>Cómo trabajo</h3>
+        <div class="cells">
+          <ul><li>Comunicación efectiva</li><li>Trabajo en equipo</li><li>Adaptabilidad</li></ul>
+          <ul><li>Pensamiento analítico</li><li>Resolución de problemas</li><li>Gestión del tiempo</li></ul>
+        </div>
+      </div>
+      <div class="row"><h3>Ubicación</h3>
+        <div class="cells">
+          <div><strong>Quito, Ecuador</strong><span>Remoto o presencial</span></div>
+          <div><strong>Zona horaria</strong><span>GMT−5</span></div>
         </div>
       </div>
     </div>
-  </section>
-</main>
+  </div>
+</section>
 
-<footer class="contact" id="contacto">
+<section class="gray contact" id="contacto" aria-labelledby="contact-title">
   <div class="wrap">
-    <div>
-      <div class="eyebrow">Contacto</div>
-      <h2>¿Construimos algo juntos?</h2>
+    <div class="head reveal">
+      <h2 id="contact-title">Hablemos.</h2>
+      <p>¿Tienes un proyecto o una vacante? Escríbeme y te respondo pronto.</p>
+      <div class="ctas"><a class="pill" href="mailto:galoorellana2002@gmail.com">Enviar un correo</a></div>
     </div>
-    <div class="rows">
-      <div><small>Correo</small><span class="val" id="email">galoorellana2002@gmail.com</span><button class="copy" type="button" data-copy="email">Copiar</button></div>
-      <div><small>Teléfono / WhatsApp</small><span class="val" id="phone">+593 098 378 8859</span><button class="copy" type="button" data-copy="phone">Copiar</button></div>
-      <div><small>Ubicación</small><span class="val">Quito, Ecuador</span><span style="opacity:.6;font-size:.9rem">Remoto o presencial</span></div>
+    <div class="cards reveal">
+      <div class="card"><small>Correo</small><span class="val" id="email">galoorellana2002@gmail.com</span><button class="copy" type="button" data-copy="email">Copiar</button></div>
+      <div class="card"><small>Teléfono / WhatsApp</small><span class="val" id="phone">+593 098 378 8859</span><button class="copy" type="button" data-copy="phone">Copiar</button></div>
+      <div class="card"><small>GitHub</small><span class="val">galoorellana2002-cmyk</span><a class="more" href="https://github.com/galoorellana2002-cmyk" target="_blank" rel="noopener">Ver perfil</a></div>
     </div>
-    <div class="foot"><span>© 2026 Galo Alejandro Orellana Astudillo</span><a href="#inicio">Volver arriba ↑</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Copyright © 2026 Galo Alejandro Orellana Astudillo.</span>
+    <span>Quito, Ecuador · <a href="#inicio">Volver arriba</a></span>
   </div>
 </footer>
 
 <script>
+// Copiar correo / teléfono
 document.querySelectorAll('.copy').forEach(function(btn){
   btn.addEventListener('click', function(){
     var el = document.getElementById(btn.dataset.copy);
@@ -435,11 +546,22 @@ document.querySelectorAll('.copy').forEach(function(btn){
     var fallback = function(){
       var r = document.createRange(); r.selectNodeContents(el);
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = 'Seleccionado';
     };
     try { navigator.clipboard.writeText(text).then(done, fallback); } catch(e){ fallback(); }
   });
 });
+
+// Aparición suave al hacer scroll
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  els.forEach(function(e){ io.observe(e); });
+  // Respaldo: si el observador no se dispara (pestaña en segundo plano, capturas), todo se muestra igual
+  setTimeout(function(){ els.forEach(function(e){ e.classList.add('in'); }); }, 2500);
+})();
 </script>
 </body>
 </html>
