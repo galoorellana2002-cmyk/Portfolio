@@ -72,6 +72,32 @@ a:hover{text-decoration:underline}
 .navlinks{display:flex;gap:30px;font-size:12px;letter-spacing:-.01em}
 .navlinks a{color:var(--ink);opacity:.8}
 .navlinks a:hover{opacity:1;text-decoration:none}
+.navright{display:flex;align-items:center;gap:10px}
+
+/* Menú hamburguesa (solo tablet vertical y celular) */
+.burger{display:none;position:relative;width:36px;height:36px;margin-right:-8px;padding:0;border:0;background:none;color:var(--ink);cursor:pointer}
+.burger span{position:absolute;left:10px;right:10px;height:1.5px;border-radius:1px;background:currentColor;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.burger span:nth-child(1){top:14px}
+.burger span:nth-child(2){top:21px}
+.menu-open .burger span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+.menu-open .burger span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+.mmenu{
+  position:fixed;inset:0;z-index:49;overflow-y:auto;background:var(--paper);
+  padding-top:calc(48px + env(safe-area-inset-top,0px) + 28px);padding-bottom:40px;
+  padding-left:max(22px, env(safe-area-inset-left, 0px));
+  padding-right:max(22px, env(safe-area-inset-right, 0px));
+  visibility:hidden;opacity:0;transition:opacity .3s ease,visibility 0s linear .3s;
+}
+.menu-open .mmenu{visibility:visible;opacity:1;transition:opacity .3s ease}
+.mmenu small{display:block;font-size:12px;color:var(--ink-3);margin-bottom:10px}
+.mmenu ul{list-style:none;margin:0;padding:0}
+.mmenu a{display:block;padding-block:7px;font-size:28px;font-weight:600;letter-spacing:-.03em;color:var(--ink)}
+.mmenu a:hover{text-decoration:none;color:var(--link)}
+.mmenu p{margin:32px 0 0;font-size:14px;color:var(--ink-2)}
+.mmenu li,.mmenu p{opacity:0;transform:translateY(-10px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.menu-open .mmenu li,.menu-open .mmenu p{opacity:1;transform:none;transition-delay:calc(var(--i) * 45ms + 90ms)}
+.menu-open .globalnav{background:var(--paper);border-bottom-color:transparent}
+.menu-open body{overflow:hidden}
 .pill{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;
   background:var(--blue);color:#fff;border-radius:980px;border:0;
@@ -160,6 +186,8 @@ h2{font-size:clamp(40px,6vw,64px);line-height:1.06;font-weight:700;letter-spacin
 .tile .stat small{font-size:14px;color:var(--ink-2)}
 .tile.black .stat small{color:var(--ink-2-on-dark)}
 .tile .date{font-size:12px;color:var(--ink-3);margin-top:10px;font-variant-numeric:tabular-nums}
+.tile .repo{font-size:17px;margin-top:14px}
+.tile.black .repo{color:var(--link-dark)}
 .art{margin-top:auto;padding-top:36px;width:100%;display:flex;justify-content:center}
 
 /* Visuales dentro de los tiles */
@@ -232,6 +260,7 @@ footer a{color:var(--ink-2)}
 }
 @media (max-width:820px){
   .navlinks{display:none}
+  .burger{display:block}
   .grid{grid-template-columns:minmax(0,1fr)}
   .tile,.tile.full{min-height:560px;padding:44px 24px 0}
   .row{grid-template-columns:minmax(0,1fr);gap:16px}
@@ -262,9 +291,24 @@ footer a{color:var(--ink-2)}
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#especificaciones">Especificaciones</a>
     </div>
-    <a class="pill sm" href="#contacto">Contáctame</a>
+    <div class="navright">
+      <a class="pill sm" href="#contacto">Contáctame</a>
+      <button class="burger" type="button" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
+    </div>
   </div>
 </nav>
+
+<div class="mmenu" id="mmenu" aria-label="Menú" role="dialog" aria-modal="true">
+  <small>Explorar</small>
+  <ul>
+    <li style="--i:0"><a href="#proyectos">Proyectos</a></li>
+    <li style="--i:1"><a href="#stack">Stack</a></li>
+    <li style="--i:2"><a href="#sobre-mi">Sobre mí</a></li>
+    <li style="--i:3"><a href="#especificaciones">Especificaciones</a></li>
+    <li style="--i:4"><a href="#contacto">Contacto</a></li>
+  </ul>
+  <p style="--i:5">galoorellana2002@gmail.com<br>Quito, Ecuador</p>
+</div>
 
 <header class="hero" id="inicio">
   <div class="wrap">
@@ -304,7 +348,7 @@ footer a{color:var(--ink-2)}
       <p>Cada proyecto empezó con un problema real y terminó con un número.</p>
     </div>
     <div class="numbers reveal">
-      <div><span class="big">8</span><span>proyectos entregados en 2024 y 2025</span></div>
+      <div><span class="big">8</span><span>proyectos entregados desde 2024</span></div>
       <div><span class="big">+200</span><span>usuarios en el primer mes de una app con IA</span></div>
       <div><span class="big">−50%</span><span>errores manuales en un sistema contable</span></div>
       <div><span class="big">+25%</span><span>satisfacción de usuario en Busch Gardens</span></div>
@@ -338,16 +382,17 @@ footer a{color:var(--ink-2)}
         </div>
       </article>
 
-      <article class="tile on-gray reveal" style="--grad:linear-gradient(90deg,#0071e3,#00a1ff)">
-        <span class="cat">Backend · Firma de abogados</span>
-        <h3>Prestige Law</h3>
-        <p>Gestión de casos con panel administrativo en la nube.</p>
-        <div class="meta"><span>React</span><span>AWS</span><span>HTML/CSS</span></div>
-        <div class="stat"><b>−40%</b><small>en tiempos de consulta</small></div>
-        <span class="date">04/2025 – Presente</span>
+      <article class="tile on-gray reveal" style="--grad:linear-gradient(90deg,#0071e3,#bf5af2)">
+        <span class="cat">E‑commerce · Ecuador</span>
+        <h3>FIDEN</h3>
+        <p>Tienda online con panel de administración, pedidos por WhatsApp y pagos con tarjeta.</p>
+        <div class="meta"><span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span><span>Payphone</span></div>
+        <div class="stat"><b>4</b><small>categorías: Beauty, Tech, Home y Lifestyle</small></div>
+        <span class="date">10/2026</span>
+        <a class="more repo" href="https://github.com/galoorellana2002-cmyk/FIDEN" target="_blank" rel="noopener">Ver en GitHub</a>
         <div class="art" aria-hidden="true">
           <div class="window"><div class="bar"><i></i><i></i><i></i></div>
-            <div class="body"><b class="span" style="--h:22px;--fill:#1d1d1f;width:40%"></b><b></b><b></b><b></b><b class="two" style="--h:70px"></b><b style="--h:70px;--fill:#0071e3"></b></div>
+            <div class="body" style="--c:4"><b class="two" style="--h:18px;--fill:#1d1d1f"></b><b class="two" style="--h:18px;--fill:transparent"></b><b style="--h:78px;--fill:linear-gradient(135deg,#ffd1dc,#ff8fab)"></b><b style="--h:78px;--fill:linear-gradient(135deg,#c7d2fe,#6366f1)"></b><b style="--h:78px;--fill:linear-gradient(135deg,#d9f99d,#65a30d)"></b><b style="--h:78px;--fill:linear-gradient(135deg,#fde68a,#f59e0b)"></b><b class="two" style="--h:12px"></b><b class="two" style="--h:28px;--fill:#0071e3"></b></div>
           </div>
         </div>
       </article>
@@ -555,6 +600,38 @@ document.querySelectorAll('.copy').forEach(function(btn){
   var onScroll = function(){ nav.classList.toggle('top', window.scrollY < 8); };
   onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
 })();
+
+// Menú hamburguesa
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('burger');
+  var menu = document.getElementById('mmenu');
+  var setOpen = function(open){
+    root.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    if (open) menu.querySelector('a').focus({ preventScroll: true });
+  };
+  btn.addEventListener('click', function(){ setOpen(!root.classList.contains('menu-open')); });
+  // Al tocar un enlace: primero se cierra el menú (y se libera el scroll), luego baja a la sección
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      setOpen(false);
+      requestAnimationFrame(function(){
+        target.scrollIntoView({ behavior: 'smooth' });
+        history.pushState(null, '', a.getAttribute('href'));
+      });
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && root.classList.contains('menu-open')) { setOpen(false); btn.focus(); }
+  });
+  // Si la pantalla se agranda con el menú abierto, se cierra solo
+  window.matchMedia('(min-width: 821px)').addEventListener('change', function(e){ if (e.matches) setOpen(false); });
+})();
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -604,7 +681,7 @@ document.querySelectorAll('.copy').forEach(function(btn){
   $$('.tile').forEach(function(t){
     gsap.from(t, { y: 80, opacity: 0, scale: 0.96, duration: 1.1, ease: ease, clearProps: 'transform',
       scrollTrigger: { trigger: t, start: 'top 92%' } });
-    gsap.from(t.querySelectorAll('.cat, h3, p, .meta, .stat, .date'), { y: 20, opacity: 0, duration: 0.8, ease: ease, stagger: 0.06,
+    gsap.from(t.querySelectorAll('.cat, h3, p, .meta, .stat, .date, .repo'), { y: 20, opacity: 0, duration: 0.8, ease: ease, stagger: 0.06,
       scrollTrigger: { trigger: t, start: 'top 80%' } });
     var art = t.querySelector('.art > *');
     if (art) gsap.fromTo(art, { yPercent: 30 }, { yPercent: 0, ease: 'none',
